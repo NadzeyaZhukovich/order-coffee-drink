@@ -32,5 +32,6 @@
         text-decoration: none;
         color: #000;
         cursor: pointer;
+        font-size: 20px;
     }
 </style>

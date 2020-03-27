@@ -5,7 +5,9 @@
             <span>Total cost:</span>
             <span>&euro; 80</span>
         </div>
-        <BasketList></BasketList>
+        <BasketList v-bind:drinksInBasket="drinksInBasket"
+                    @delete-item="deleteItem"
+        ></BasketList>
         <div class="Basket_order">
             <button class="Basket_order--btn">Order</button>
         </div>
@@ -18,6 +20,12 @@
         name: 'Basket',
         components: {
             BasketList,
+        },
+        props: ['drinksInBasket'],
+        methods: {
+            deleteItem(id) {
+                this.$emit('delete-item', id);
+            }
         }
     }
 </script>

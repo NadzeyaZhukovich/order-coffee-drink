@@ -1,25 +1,38 @@
 <template>
     <li class="CoffeeDrink_content">
         <div class="CoffeeDrink_iconBox">
-            <img src="https://api.coffee-drinks.alexzh.com/store/img/196/latte.png" class="CoffeeDrink_icon">
+            <img
+              class="CoffeeDrink_icon"
+              v-bind:src="coffee.image">
         </div>
 
         <div class="CoffeeDrink_information">
-            <span class="CoffeeDrink_name"><b>Kind of coffee</b></span>
-            <span class="CoffeeDrink_description">Ac erat mus lectus dolor habitasse.
-                Consequat adipiscing nascetur nunc egestas elit?
-                Sapien natoque semper hendrerit eget vulputate magna ut orci torquent.
-            </span>
+            <span class="CoffeeDrink_name"><b>{{coffee.name}}</b></span>
+            <span class="CoffeeDrink_description">{{coffee.description}}</span>
         </div>
 
         <div class="CoffeeDrink_price">
-            <span>&euro; 4</span>
-            <button class="CoffeeDrink_choose">
+            <span>&euro; {{coffee.price}}</span>
+            <button class="CoffeeDrink_choose"
+                    @click="$emit('selected-drink', coffee)"
+            >
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
         </div>
     </li>
 </template>
+
+<script>
+    export default {
+        name: 'CoffeeListItem',
+        props: {
+            coffee: {
+                type: Object,
+                required: true
+            }
+        },
+    }
+</script>
 
 <style>
     .CoffeeDrink_content  {
@@ -37,6 +50,11 @@
     .CoffeeDrink_iconBox {
         text-align: center;
         background-color: #008376;
+    }
+
+    .CoffeeDrink_icon {
+      width: auto;
+      height: 150px;
     }
 
     .CoffeeDrink_information {

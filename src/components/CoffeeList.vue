@@ -1,9 +1,12 @@
 <template>
     <div class="CoffeeList_content">
         <ul class="CoffeeList_list">
-            <CoffeeListItem/>
-            <CoffeeListItem/>
-            <CoffeeListItem/>
+            <CoffeeListItem
+                v-for="(coffeeDrink, index) in coffeeDrinks"
+                v-bind:coffee="coffeeDrink"
+                :key="index"
+                @selected-drink="selectedDrink"
+            />
         </ul>
     </div>
 </template>
@@ -12,7 +15,14 @@
     import CoffeeListItem from "./CoffeeListItem";
     export default {
         name: 'CoffeeList',
-        components: {CoffeeListItem}
+        components: {CoffeeListItem},
+        props: ['coffeeDrinks'],
+
+        methods: {
+            selectedDrink(drink) {
+                this.$emit('selected-drink', drink)
+            }
+        }
     }
 </script>
 

@@ -1,6 +1,11 @@
 <template>
     <div>
-        <BasketListItem></BasketListItem>
+        <BasketListItem
+            v-for="(drink, index) in drinksInBasket"
+            :key="index"
+            :drink="drink"
+            @delete-item="deleteItem"
+        />
     </div>
 </template>
 
@@ -10,6 +15,12 @@
         name: 'BasketList',
         components: {
             BasketListItem,
+        },
+        props: ['drinksInBasket'],
+        methods: {
+            deleteItem(id) {
+                this.$emit('delete-item', id);
+            }
         }
     }
 </script>

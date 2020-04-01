@@ -3,11 +3,10 @@
         <Header></Header>
         <section class="row">
             <CoffeeList v-bind:coffeeDrinks="coffeeDrinks"
-                        @selected-drink="selectedDrink"
-            />
+                        @selected-drink="selectedDrink"/>
             <Basket v-bind:drinksInBasket="drinksInBasket"
                     @delete-item="deleteItem"
-            />
+                    @order="order"/>
         </section>
         <Footer></Footer>
     </div>
@@ -18,6 +17,7 @@
     import Basket from '@/components/Basket';
     import Header from '@/components/Header';
     import Footer from '@/components/Footer';
+    import BasketProduct from '@/models/basket-product';
 
     export default {
         name: 'App',
@@ -45,11 +45,23 @@
 
         methods: {
             selectedDrink(drink) {
-                this.drinksInBasket.push(drink);
+              let product =  this.drinksInBasket.find(element => element.drink.id === drink.id);
+
+              if(product !== undefined) {
+                product.quantity++;
+                this.drinksInBasket = this.drinksInBasket.filter(element => element.drink.id !== drink.id);
+                this.drinksInBasket.push(product);
+              } else {
+                this.drinksInBasket.push(new BasketProduct(drink, 1));
+              }
             },
 
             deleteItem(id) {
-                this.drinksInBasket = this.drinksInBasket.filter(t => t.id !== id);
+                this.drinksInBasket = this.drinksInBasket.filter(element => element.drink.id !== id);
+            },
+
+            order() {
+              this.drinksInBasket = this.drinksInBasket.splice(0, this.drinksInBasket.length - 1);
             }
         }
     }

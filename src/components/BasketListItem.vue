@@ -1,16 +1,17 @@
 <template>
     <div class="BasketItem_content">
-        <span class="BasketItem_product">{{drink.name}}</span>
+        <span class="BasketItem_product">{{product.drink.name}}</span>
         <span>
             <button class="BasketItem_counter btn"
-                    @click="deleteItem"
-            >-</button>
-            <span class="BasketItem_quantity">{{quantityCoffee}}</span>
+                    @click="deleteProductItem">-
+            </button>
+            <span class="BasketItem_quantity">{{product.quantity}}</span>
             <button class="BasketItem_counter btn"
-                    @click="addItem"
-            >+</button>
-            <span class="BasketItem_cost">&euro; {{coffeePrice}}</span>
-            <button class="BasketItem_delete btn">
+                    @click="addProductItem">+
+            </button>
+            <span class="BasketItem_cost">&euro; {{product.drink.price}}</span>
+            <button class="BasketItem_delete btn"
+                    @click="deleteProduct">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
         </span>
@@ -20,36 +21,28 @@
 <script>
     export default {
         name: 'BasketListItem',
-        props: ['drink'],
-        data() {
-            return {
-                quantityCoffee: 1,
-            }
-        },
-        computed: {
-            coffeePrice: {
-                get() {
-                    return this.quantityCoffee * this.drink.price;
-                }
-            }
-        },
+        props: ['product'],
         methods: {
-            deleteItem() {
-                if(this.quantityCoffee > 1) {
-                    this.quantityCoffee--;
+            deleteProductItem() {
+                if(this.product.quantity > 1) {
+                    this.product.quantity--;
                 } else {
-                    this.$emit('delete-item', this.drink.id);
+                    this.deleteProduct();
                 }
             },
-            addItem() {
-                if(this.quantityCoffee < 99) {
-                    this.quantityCoffee++;
+
+            addProductItem() {
+                if(this.product.quantity < 99) {
+                    this.product.quantity++;
                 } else {
                     alert('Too much coffee');
                 }
+            },
+
+            deleteProduct() {
+                this.$emit('delete-item', this.product.drink.id);
             }
         }
-
     }
 </script>
 

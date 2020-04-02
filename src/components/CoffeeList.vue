@@ -19,8 +19,8 @@
         props: ['coffeeDrinks'],
 
         methods: {
-            selectedDrink(drink) {
-                this.$emit('selected-drink', drink)
+            selectedDrink(id) {
+                this.$emit('selected-drink', id)
             }
         }
     }

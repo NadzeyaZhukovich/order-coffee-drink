@@ -6,8 +6,9 @@
             <span>&euro; {{countTotalCostOfItems()}}</span>
         </div>
         <BasketList v-bind:drinksInBasket="drinksInBasket"
-                    @delete-item="deleteItem">
-        </BasketList>
+                    @delete-item="deleteItem"
+                    @delete-product-item="deleteProductItem"
+                    @add-product-item="addProductItem"/>
         <div class="Basket_order">
             <button class="Basket_order--btn"
                     :disabled="!drinksInBasket.length"
@@ -29,14 +30,24 @@
             deleteItem(id) {
                 this.$emit('delete-item', id);
             },
-            countTotalCostOfItems() {
-              return this.drinksInBasket
-                  .map(element => element.drink.price * element.quantity)
-                  .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+
+            deleteProductItem(id) {
+                this.$emit('delete-product-item', id)
             },
+
+            addProductItem(id) {
+                this.$emit('add-product-item', id)
+            },
+
+            countTotalCostOfItems() {
+                return this.drinksInBasket
+                    .map(element => element.drink.price * element.quantity)
+                    .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+            },
+
             order() {
-              this.$emit('order');
-              alert('The order is completed');
+                 this.$emit('order');
+                alert('The order is completed');
             }
         }
     }

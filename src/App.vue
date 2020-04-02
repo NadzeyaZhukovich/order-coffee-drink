@@ -3,10 +3,12 @@
         <Header></Header>
         <section class="row">
             <CoffeeList v-bind:coffeeDrinks="coffeeDrinks"
-                        @selected-drink="selectedDrink"/>
+                        @selected-drink="addDrink"/>
             <Basket v-bind:drinksInBasket="drinksInBasket"
                     @delete-item="deleteItem"
-                    @order="order"/>
+                    @order="order"
+                    @delete-product-item="deleteProductItem"
+                    @add-product-item="addDrink"/>
         </section>
         <Footer></Footer>
     </div>
@@ -44,20 +46,27 @@
         },
 
         methods: {
-            selectedDrink(drink) {
-              let product =  this.drinksInBasket.find(element => element.drink.id === drink.id);
-
-              if(product !== undefined) {
-                product.quantity++;
-                this.drinksInBasket = this.drinksInBasket.filter(element => element.drink.id !== drink.id);
-                this.drinksInBasket.push(product);
-              } else {
-                this.drinksInBasket.push(new BasketProduct(drink, 1));
-              }
+            addDrink(id) {
+                let product =  this.drinksInBasket.find(element => element.drink.id === id);
+                if(product !== undefined) {
+                    product.quantity++;
+                } else {
+                    const drink = this.coffeeDrinks.find(element => element.id === id);
+                    this.drinksInBasket.push(new BasketProduct(drink, 1));
+                }
             },
 
             deleteItem(id) {
                 this.drinksInBasket = this.drinksInBasket.filter(element => element.drink.id !== id);
+            },
+
+            deleteProductItem(id) {
+              let product= this.drinksInBasket.find(element => element.drink.id === id);
+              if(product.quantity > 1) {
+                product.quantity --;
+              } else {
+                    this.deleteItem(id);
+                }
             },
 
             order() {

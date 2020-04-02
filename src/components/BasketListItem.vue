@@ -24,19 +24,11 @@
         props: ['product'],
         methods: {
             deleteProductItem() {
-                if(this.product.quantity > 1) {
-                    this.product.quantity--;
-                } else {
-                    this.deleteProduct();
-                }
+                this.$emit('delete-product-item', this.product.drink.id);
             },
 
             addProductItem() {
-                if(this.product.quantity < 99) {
-                    this.product.quantity++;
-                } else {
-                    alert('Too much coffee');
-                }
+                this.$emit('add-product-item', this.product.drink.id);
             },
 
             deleteProduct() {

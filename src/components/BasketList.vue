@@ -4,7 +4,9 @@
             v-for="(product, index) in drinksInBasket"
             :key="index"
             :product="product"
-            @delete-item="deleteItem"/>
+            @delete-item="deleteItem"
+            @delete-product-item="deleteProductItem"
+            @add-product-item="addProductItem"/>
     </div>
 </template>
 
@@ -20,7 +22,15 @@
         methods: {
             deleteItem(id) {
                 this.$emit('delete-item', id);
-            }
+            },
+
+            deleteProductItem(id) {
+                this.$emit('delete-product-item', id)
+            },
+
+            addProductItem(id) {
+              this.$emit('add-product-item', id)
+            },
         }
     }
 </script>

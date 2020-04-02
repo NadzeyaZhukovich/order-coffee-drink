@@ -4,9 +4,9 @@
             v-for="(product, index) in drinksInBasket"
             :key="index"
             :product="product"
-            @delete-item="deleteItem"
-            @delete-product-item="deleteProductItem"
-            @add-product-item="addProductItem"/>
+            @delete-item="deleteDrink"
+            @delete-drink-item="deleteDrinkItem"
+            @add-drink-item="addDrinkItem"/>
     </div>
 </template>
 
@@ -20,16 +20,16 @@
         },
         props: ['drinksInBasket'],
         methods: {
-            deleteItem(id) {
+            deleteDrink(id) {
                 this.$emit('delete-item', id);
             },
 
-            deleteProductItem(id) {
-                this.$emit('delete-product-item', id)
+            deleteDrinkItem(id) {
+                this.$emit('delete-drink-item', id)
             },
 
-            addProductItem(id) {
-              this.$emit('add-product-item', id)
+            addDrinkItem(id) {
+              this.$emit('add-drink-item', id)
             },
         }
     }

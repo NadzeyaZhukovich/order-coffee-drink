@@ -3,12 +3,12 @@
         <h2 class="Basket_title">Oder coffee drinks</h2>
         <div class="Basket_cost">
             <span>Total cost:</span>
-            <span>&euro; {{countTotalCostOfItems()}}</span>
+            <span>&euro; {{countTotalCostOfDrinks()}}</span>
         </div>
         <BasketList v-bind:drinksInBasket="drinksInBasket"
-                    @delete-item="deleteItem"
-                    @delete-product-item="deleteProductItem"
-                    @add-product-item="addProductItem"/>
+                    @delete-item="deleteDrink"
+                    @delete-drink-item="deleteDrinkItem"
+                    @add-drink-item="addDrinkItem"/>
         <div class="Basket_order">
             <button class="Basket_order--btn"
                     :disabled="!drinksInBasket.length"
@@ -27,19 +27,19 @@
         },
         props: ['drinksInBasket'],
         methods: {
-            deleteItem(id) {
+            deleteDrink(id) {
                 this.$emit('delete-item', id);
             },
 
-            deleteProductItem(id) {
-                this.$emit('delete-product-item', id)
+            deleteDrinkItem(id) {
+                this.$emit('delete-drink-item', id)
             },
 
-            addProductItem(id) {
-                this.$emit('add-product-item', id)
+            addDrinkItem(id) {
+                this.$emit('add-drink-item', id)
             },
 
-            countTotalCostOfItems() {
+            countTotalCostOfDrinks() {
                 return this.drinksInBasket
                     .map(element => element.drink.price * element.quantity)
                     .reduce((accumulator, currentValue) => accumulator + currentValue, 0)

@@ -3,15 +3,15 @@
         <span class="BasketItem_product">{{product.drink.name}}</span>
         <span>
             <button class="BasketItem_counter btn"
-                    @click="deleteProductItem">-
+                    @click="deleteDrinkItem">-
             </button>
             <span class="BasketItem_quantity">{{product.quantity}}</span>
             <button class="BasketItem_counter btn"
-                    @click="addProductItem">+
+                    @click="addDrinkItem">+
             </button>
             <span class="BasketItem_cost">&euro; {{product.drink.price}}</span>
             <button class="BasketItem_delete btn"
-                    @click="deleteProduct">
+                    @click="deleteDrink">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
         </span>
@@ -23,15 +23,15 @@
         name: 'BasketListItem',
         props: ['product'],
         methods: {
-            deleteProductItem() {
-                this.$emit('delete-product-item', this.product.drink.id);
+            deleteDrinkItem() {
+                this.$emit('delete-drink-item', this.product.drink.id);
             },
 
-            addProductItem() {
-                this.$emit('add-product-item', this.product.drink.id);
+            addDrinkItem() {
+                this.$emit('add-drink-item', this.product.drink.id);
             },
 
-            deleteProduct() {
+            deleteDrink() {
                 this.$emit('delete-item', this.product.drink.id);
             }
         }

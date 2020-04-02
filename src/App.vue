@@ -3,12 +3,12 @@
         <Header></Header>
         <section class="row">
             <CoffeeList v-bind:coffeeDrinks="coffeeDrinks"
-                        @selected-drink="addDrink"/>
+                        @add-drink="addDrink"/>
             <Basket v-bind:drinksInBasket="drinksInBasket"
-                    @delete-item="deleteItem"
+                    @delete-item="deleteDrink"
                     @order="order"
-                    @delete-product-item="deleteProductItem"
-                    @add-product-item="addDrink"/>
+                    @delete-drink-item="deleteDrinkItem"
+                    @add-drink-item="addDrink"/>
         </section>
         <Footer></Footer>
     </div>
@@ -56,16 +56,16 @@
                 }
             },
 
-            deleteItem(id) {
+            deleteDrink(id) {
                 this.drinksInBasket = this.drinksInBasket.filter(element => element.drink.id !== id);
             },
 
-            deleteProductItem(id) {
+            deleteDrinkItem(id) {
               let product= this.drinksInBasket.find(element => element.drink.id === id);
               if(product.quantity > 1) {
                 product.quantity --;
               } else {
-                    this.deleteItem(id);
+                    this.deleteDrink(id);
                 }
             },
 

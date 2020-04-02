@@ -14,7 +14,7 @@
         <div class="CoffeeDrink_price">
             <span>&euro; {{coffee.price}}</span>
             <button class="CoffeeDrink_choose"
-                    @click="$emit('selected-drink', coffee.id)"
+                    @click="$emit('add-drink', coffee.id)"
             >
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </button>

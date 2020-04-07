@@ -3,11 +3,12 @@
         <Header></Header>
         <section class="row">
             <CoffeeList v-bind:coffeeDrinks="coffeeDrinks"
-                        @selected-drink="selectedDrink"
-            />
+                        @add-drink="addDrink"/>
             <Basket v-bind:drinksInBasket="drinksInBasket"
-                    @delete-item="deleteItem"
-            />
+                    @delete-item="deleteDrink"
+                    @order="order"
+                    @delete-drink-item="deleteDrinkItem"
+                    @add-drink-item="addDrink"/>
         </section>
         <Footer></Footer>
     </div>
@@ -18,6 +19,7 @@
     import Basket from '@/components/Basket';
     import Header from '@/components/Header';
     import Footer from '@/components/Footer';
+    import BasketProduct from '@/models/basket-product';
 
     export default {
         name: 'App',
@@ -44,12 +46,31 @@
         },
 
         methods: {
-            selectedDrink(drink) {
-                this.drinksInBasket.push(drink);
+            addDrink(id) {
+                let product =  this.drinksInBasket.find(element => element.drink.id === id);
+                if(product !== undefined) {
+                    product.quantity++;
+                } else {
+                    const drink = this.coffeeDrinks.find(element => element.id === id);
+                    this.drinksInBasket.push(new BasketProduct(drink, 1));
+                }
             },
 
-            deleteItem(id) {
-                this.drinksInBasket = this.drinksInBasket.filter(t => t.id !== id);
+            deleteDrink(id) {
+                this.drinksInBasket = this.drinksInBasket.filter(element => element.drink.id !== id);
+            },
+
+            deleteDrinkItem(id) {
+              let product= this.drinksInBasket.find(element => element.drink.id === id);
+              if(product.quantity > 1) {
+                product.quantity --;
+              } else {
+                    this.deleteDrink(id);
+                }
+            },
+
+            order() {
+              this.drinksInBasket = this.drinksInBasket.splice(0, this.drinksInBasket.length - 1);
             }
         }
     }

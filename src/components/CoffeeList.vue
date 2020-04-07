@@ -5,7 +5,7 @@
                 v-for="(coffeeDrink, index) in coffeeDrinks"
                 v-bind:coffee="coffeeDrink"
                 :key="index"
-                @selected-drink="selectedDrink"
+                @add-drink="addDrink"
             />
         </ul>
     </div>
@@ -19,8 +19,8 @@
         props: ['coffeeDrinks'],
 
         methods: {
-            selectedDrink(drink) {
-                this.$emit('selected-drink', drink)
+            addDrink(id) {
+                this.$emit('add-drink', id)
             }
         }
     }

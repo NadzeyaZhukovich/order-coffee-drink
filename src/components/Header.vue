@@ -2,6 +2,7 @@
     <header class="DesktopHeader_content">
         <div class="DesktopHeader_header">
             <div class="DesktopHeader_logo">
+                <img src="../assets/logo.svg" alt="App logo" width="72" height="72">
                 <a href="#">Coffee Drinks</a>
             </div>
         </div>
@@ -30,10 +31,20 @@
         height: 70px;
     }
 
+    .DesktopHeader_logo{
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        height: 50px;
+        width: auto;
+    }
     .DesktopHeader_header a {
         text-decoration: none;
         color: #ffffff;
         cursor: pointer;
         font-size: 20px;
+       margin-left: 10px;
     }
 </style>

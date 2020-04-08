@@ -16,7 +16,9 @@
         left: 0;
         z-index: 100;
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff;
+        /*background-color: #ffffff;*/
+        /*background-color: #00584C;*/
+        background-color: #24423c;
     }
 
     .DesktopHeader_header {
@@ -30,7 +32,7 @@
 
     .DesktopHeader_header a {
         text-decoration: none;
-        color: #000;
+        color: #ffffff;
         cursor: pointer;
         font-size: 20px;
     }

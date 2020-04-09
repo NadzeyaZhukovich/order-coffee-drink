@@ -5,8 +5,23 @@
                 <a href="#">Coffee Drinks</a>
             </div>
         </div>
+        <SortSelector @sort="sort"/>
     </header>
 </template>
+
+<script>
+    import SortSelector from '@/components/SortSelector';
+
+    export default {
+        name: 'App',
+        components: {SortSelector},
+        methods: {
+            sort(param) {
+                this.$emit('sort', param);
+            }
+        }
+    }
+</script>
 
 <style>
     .DesktopHeader_content {

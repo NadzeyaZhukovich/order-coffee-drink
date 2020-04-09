@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header></Header>
+        <Header @sort="sort"></Header>
         <section class="row">
             <CoffeeList v-bind:coffeeDrinks="coffeeDrinks"
                         @add-drink="addDrink"/>
@@ -20,6 +20,26 @@
     import Header from '@/components/Header';
     import Footer from '@/components/Footer';
     import BasketProduct from '@/models/basket-product';
+
+    const alphabeticalNameDescComparator = (a, b) => {
+        if (a.name > b.name) {
+            return -1;
+        }
+        if (a.name < b.name) {
+            return 1;
+        }
+        return 0;
+    };
+
+    const alphabeticalNameAscComparator = (a, b) => {
+        if (a.name > b.name) {
+            return -1;
+        }
+        if (a.name < b.name) {
+            return 1;
+        }
+        return 0;
+    };
 
     export default {
         name: 'App',
@@ -71,7 +91,15 @@
 
             order() {
               this.drinksInBasket = this.drinksInBasket.splice(0, this.drinksInBasket.length - 1);
-            }
+            },
+
+            sort(param) {
+                if (param === 'A-Z') {
+                    this.coffeeDrinks.sort((a, b) => alphabeticalNameAscComparator(a, b));
+                } else {
+                    this.coffeeDrinks.sort((a, b) => alphabeticalNameDescComparator(a, b));
+                }
+            },
         }
     }
 </script>

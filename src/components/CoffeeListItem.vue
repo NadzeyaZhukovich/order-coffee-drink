@@ -49,7 +49,8 @@
 
     .CoffeeDrink_iconBox {
         text-align: center;
-        background-color: #008376;
+        /*background-color: #008376;*/
+        background-color: #488478;
     }
 
     .CoffeeDrink_icon {

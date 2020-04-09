@@ -5,8 +5,8 @@
                 <img src="../assets/logo.svg" alt="App logo" width="72" height="72">
                 <a href="#">Coffee Drinks</a>
             </div>
+            <SortSelector @sort="sort"/>
         </div>
-        <SortSelector @sort="sort"/>
     </header>
 </template>
 
@@ -42,6 +42,7 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         position: relative;
         height: 70px;
     }

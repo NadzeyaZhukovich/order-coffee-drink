@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <select name="sort" v-model="selected">
-      <option>sort A-Z</option>
-      <option>sort Z-A</option>
+  <div class="sort-selector">
+    <select class="sort-selector__selector"
+            name="sort"
+            v-model="selected">
+      <option class="sort-selector__option">sort A-Z</option>
+      <option class="sort-selector__option">sort Z-A</option>
     </select>
   </div>
 
@@ -27,3 +29,16 @@
     }
   }
 </script>
+
+<style>
+  .sort-selector__selector {
+    width: 100px;
+    padding: 3px;
+    border: none;
+
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+</style>
